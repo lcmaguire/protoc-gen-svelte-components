@@ -1,0 +1,22 @@
+{
+  "name": "protoc-gen-twirp-es",
+  "version": "v0.2.1",
+  "devDependencies": {
+    "@bufbuild/connect-web": "^0.3.1",
+    "@bufbuild/protobuf": "^0.2.1",
+    "@bufbuild/protoc-gen-connect-web": "^0.3.1",
+    "@bufbuild/protoc-gen-es": "^0.2.1"
+  },
+  "dependencies": {
+    "@buf/bufbuild_connect-web_bufbuild_eliza": "^1.11.6",
+    "@bufbuild/protoc-gen-es": "^0.2.1",
+    "@bufbuild/protoplugin": "^0.2.1",
+    "grpc": "^1.24.11",
+    "protobufjs": "^7.1.2",
+    "tsx": "^3.11.0"
+  },
+  "scripts": {
+    "build": "./node_modules/typescript/bin/tsc --noEmit",
+    "buf:generate": "buf generate proto"
+  }
+}
