@@ -16,7 +16,7 @@ service ExampleService {
 
 message Example {
     string name = 1;
-    string display_name = 2;
+    string display_name = 2 [json_name="displayName"];
 }
 
 message GetExampleRequest {
