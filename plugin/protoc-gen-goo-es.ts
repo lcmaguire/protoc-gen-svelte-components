@@ -34,6 +34,8 @@ function generateTs(schema: Schema) {
         // for each field -> gen view for Create, Get, List, Update and Delete
         if (method.name.includes("Get")){
           genGet(schema, method)
+        } else if (method.name.includes("List")){
+          genList(schema, method)
         }
       }
     }
@@ -106,6 +108,7 @@ function genGet(schema: Schema, method : DescMethod){
   // todo probably handle this nicer
   </script>
   
+  <h3>${methodName}</h3>
   {#if res != null}
   ${html}
   {/if}
@@ -114,5 +117,70 @@ function genGet(schema: Schema, method : DescMethod){
   // method.
   
   // find out what f.preamble does
+  f.print(svelteTplate)
+}
+
+// todo for this.
+function genList(schema: Schema, method : DescMethod){
+  //let listResponse = method.output
+  // for fields in response create view
+  const f = schema.generateFile(`${method.name}.svelte`);
+  
+  let ServiceName = "ExampleService" // todo dont hardcode this
+  let methodName = "listExamples" // todo get this from component
+  //  method.name
+
+  const svelteTplate = `<script>
+  // Goal is to have it work with https://google.aip.dev/131
+
+  // todo consider doing this via protogen import
+  import { onMount } from "svelte";
+  
+  import {
+    createConnectTransport,
+    createPromiseClient,
+  } from "@bufbuild/connect-web";
+
+  import {
+    ${ServiceName}
+  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
+  
+  // todo import stuff and add logic here
+  // call code used by generated plugin
+  // todo move client creation to seperate pkg and import it here.
+  const transport = createConnectTransport({
+    baseUrl: "http://localhost:8080", // this should be set via config 
+  })
+  const client = createPromiseClient(${ServiceName}, transport)
+  
+  let loading = true // todo use this
+  let res;
+  
+  // call via onMount
+  onMount(async () => {
+    return await listExamples()
+  })
+
+  async function listExamples() {
+    res = await client.${methodName}({}) // todo pass in required fields
+    loading = false
+  }
+  // todo probably handle this nicer
+  </script>
+
+  <h3>${methodName}</h3>
+  
+  {#if res != null}
+    {#each res.examples as item}
+    <ul>
+      <li>{item.name}</li>
+    </ul>
+    {/each}
+  {/if}
+  `
+  /*
+    should research svelte / js patterns for doing this thing nicely.
+    could theoretically pass values of list in to a Get ui component.
+  */ 
   f.print(svelteTplate)
 }

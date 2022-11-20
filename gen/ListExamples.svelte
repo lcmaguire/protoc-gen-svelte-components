@@ -13,8 +13,6 @@
     ExampleService
   } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
   
-  export let name;
-
   // todo import stuff and add logic here
   // call code used by generated plugin
   // todo move client creation to seperate pkg and import it here.
@@ -23,23 +21,28 @@
   })
   const client = createPromiseClient(ExampleService, transport)
   
-  let loading = true
+  let loading = true // todo use this
   let res;
   
   // call via onMount
   onMount(async () => {
-    return await getExample()
+    return await listExamples()
   })
 
-  async function getExample() {
-    res = await client.getExample({name: name}) // todo pass in required fields
+  async function listExamples() {
+    res = await client.listExamples({}) // todo pass in required fields
     loading = false
   }
   // todo probably handle this nicer
   </script>
+
+  <h3>listExamples</h3>
   
-  <h3>getExample</h3>
   {#if res != null}
-  <p>{res.name}</p><p>{res.display_name}</p>
+    {#each res.examples as item}
+    <ul>
+      <li>{item.name}</li>
+    </ul>
+    {/each}
   {/if}
   
