@@ -57,16 +57,13 @@ function genGet(schema: Schema, method:DescMethod){
     // would need currentField + 
     // this needs to be fieldName, maybe res.${fieldName}
     //currentField.name
-    let out = `
-    <p>res.{${currentField.name}}</p>
-    ` 
+    let out = `<p>{res.${currentField.name}}</p>` 
     html += out
   }
 
   let ServiceName = "ExampleService" // todo dont hardcode this
   let methodName = "getExample" // todo get this from component
-  const svelteTplate = `
-  <script>
+  const svelteTplate = `<script>
 
   // todo consider doing this via protogen import
   import {
@@ -82,12 +79,18 @@ function genGet(schema: Schema, method:DescMethod){
   })
   const client = createPromiseClient(${ServiceName}, transport)
   
-
-  let res = res = await client.${methodName}({}) // todo pass in required fields 
+  let loading = true
+  let res;
+  async function getExample() {
+    res = await client.${methodName}({}) // todo pass in required fields
+    loading = false
+  }
   // todo probably handle this nicer
   </script>
   
+  {#if res}
   ${html}
+  {/if}
   `
   // find out what f.preamble does
   f.print(svelteTplate)

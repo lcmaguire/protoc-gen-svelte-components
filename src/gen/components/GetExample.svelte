@@ -1,5 +1,4 @@
-
-  <script>
+<script>
 
   // todo consider doing this via protogen import
   import {
@@ -15,12 +14,16 @@
   })
   const client = createPromiseClient(ExampleService, transport)
   
-
-  let res = res = await client.getExample({}) // todo pass in required fields 
+  let loading = true
+  let res;
+  async function getExample() {
+    res = await client.getExample({}) // todo pass in required fields
+    loading = false
+  }
   // todo probably handle this nicer
   </script>
   
-  
-    <p>res.{name}</p>
-    
+  {#if res}
+  <p>{res.name}</p>
+  {/if}
   
