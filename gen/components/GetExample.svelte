@@ -24,6 +24,6 @@
   </script>
   
   {#if res}
-  <p>{res.name}</p>
+  <p>{res.name}</p><p>{res.display_name}</p>
   {/if}
   

@@ -3,7 +3,7 @@
 /* eslint-disable */
 /* @ts-nocheck */
 
-import {SearchRequest, SearchResponse} from "./example_pb.js";
+import {DeleteExampleRequest, Example, GetExampleRequest, ListExampleRequest, ListExampleResponse} from "./example_pb.js";
 import {Empty, MethodKind} from "@bufbuild/protobuf";
 
 /**
@@ -19,8 +19,8 @@ export const ExampleService = {
      */
     createExample: {
       name: "CreateExample",
-      I: SearchRequest,
-      O: SearchResponse,
+      I: Example,
+      O: Example,
       kind: MethodKind.Unary,
     },
     /**
@@ -28,8 +28,8 @@ export const ExampleService = {
      */
     getExample: {
       name: "GetExample",
-      I: SearchRequest,
-      O: SearchResponse,
+      I: GetExampleRequest,
+      O: Example,
       kind: MethodKind.Unary,
     },
     /**
@@ -37,8 +37,8 @@ export const ExampleService = {
      */
     listExamples: {
       name: "ListExamples",
-      I: SearchRequest,
-      O: SearchResponse,
+      I: ListExampleRequest,
+      O: ListExampleResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -46,8 +46,8 @@ export const ExampleService = {
      */
     updateExample: {
       name: "UpdateExample",
-      I: SearchRequest,
-      O: SearchResponse,
+      I: Example,
+      O: Example,
       kind: MethodKind.Unary,
     },
     /**
@@ -55,7 +55,7 @@ export const ExampleService = {
      */
     deleteExample: {
       name: "DeleteExample",
-      I: SearchRequest,
+      I: DeleteExampleRequest,
       O: Empty,
       kind: MethodKind.Unary,
     },

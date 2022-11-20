@@ -7,9 +7,9 @@ import type {BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMe
 import {Message, proto3} from "@bufbuild/protobuf";
 
 /**
- * @generated from message tutorial.SearchRequest
+ * @generated from message tutorial.Example
  */
-export class SearchRequest extends Message<SearchRequest> {
+export class Example extends Message<Example> {
   /**
    * @generated from field: string name = 1;
    */
@@ -20,69 +20,174 @@ export class SearchRequest extends Message<SearchRequest> {
    */
   displayName = "";
 
-  constructor(data?: PartialMessage<SearchRequest>) {
+  constructor(data?: PartialMessage<Example>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime = proto3;
-  static readonly typeName = "tutorial.SearchRequest";
+  static readonly typeName = "tutorial.Example";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SearchRequest {
-    return new SearchRequest().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Example {
+    return new Example().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SearchRequest {
-    return new SearchRequest().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Example {
+    return new Example().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SearchRequest {
-    return new SearchRequest().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Example {
+    return new Example().fromJsonString(jsonString, options);
   }
 
-  static equals(a: SearchRequest | PlainMessage<SearchRequest> | undefined, b: SearchRequest | PlainMessage<SearchRequest> | undefined): boolean {
-    return proto3.util.equals(SearchRequest, a, b);
+  static equals(a: Example | PlainMessage<Example> | undefined, b: Example | PlainMessage<Example> | undefined): boolean {
+    return proto3.util.equals(Example, a, b);
   }
 }
 
 /**
- * @generated from message tutorial.SearchResponse
+ * @generated from message tutorial.GetExampleRequest
  */
-export class SearchResponse extends Message<SearchResponse> {
+export class GetExampleRequest extends Message<GetExampleRequest> {
   /**
    * @generated from field: string name = 1;
    */
   name = "";
 
-  constructor(data?: PartialMessage<SearchResponse>) {
+  constructor(data?: PartialMessage<GetExampleRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime = proto3;
-  static readonly typeName = "tutorial.SearchResponse";
+  static readonly typeName = "tutorial.GetExampleRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SearchResponse {
-    return new SearchResponse().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetExampleRequest {
+    return new GetExampleRequest().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SearchResponse {
-    return new SearchResponse().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetExampleRequest {
+    return new GetExampleRequest().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SearchResponse {
-    return new SearchResponse().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetExampleRequest {
+    return new GetExampleRequest().fromJsonString(jsonString, options);
   }
 
-  static equals(a: SearchResponse | PlainMessage<SearchResponse> | undefined, b: SearchResponse | PlainMessage<SearchResponse> | undefined): boolean {
-    return proto3.util.equals(SearchResponse, a, b);
+  static equals(a: GetExampleRequest | PlainMessage<GetExampleRequest> | undefined, b: GetExampleRequest | PlainMessage<GetExampleRequest> | undefined): boolean {
+    return proto3.util.equals(GetExampleRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message tutorial.DeleteExampleRequest
+ */
+export class DeleteExampleRequest extends Message<DeleteExampleRequest> {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name = "";
+
+  constructor(data?: PartialMessage<DeleteExampleRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "tutorial.DeleteExampleRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteExampleRequest {
+    return new DeleteExampleRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteExampleRequest {
+    return new DeleteExampleRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteExampleRequest {
+    return new DeleteExampleRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteExampleRequest | PlainMessage<DeleteExampleRequest> | undefined, b: DeleteExampleRequest | PlainMessage<DeleteExampleRequest> | undefined): boolean {
+    return proto3.util.equals(DeleteExampleRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message tutorial.ListExampleRequest
+ */
+export class ListExampleRequest extends Message<ListExampleRequest> {
+  constructor(data?: PartialMessage<ListExampleRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "tutorial.ListExampleRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListExampleRequest {
+    return new ListExampleRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListExampleRequest {
+    return new ListExampleRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListExampleRequest {
+    return new ListExampleRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ListExampleRequest | PlainMessage<ListExampleRequest> | undefined, b: ListExampleRequest | PlainMessage<ListExampleRequest> | undefined): boolean {
+    return proto3.util.equals(ListExampleRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message tutorial.ListExampleResponse
+ */
+export class ListExampleResponse extends Message<ListExampleResponse> {
+  /**
+   * @generated from field: repeated tutorial.Example examples = 1;
+   */
+  examples: Example[] = [];
+
+  constructor(data?: PartialMessage<ListExampleResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "tutorial.ListExampleResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "examples", kind: "message", T: Example, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListExampleResponse {
+    return new ListExampleResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListExampleResponse {
+    return new ListExampleResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListExampleResponse {
+    return new ListExampleResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ListExampleResponse | PlainMessage<ListExampleResponse> | undefined, b: ListExampleResponse | PlainMessage<ListExampleResponse> | undefined): boolean {
+    return proto3.util.equals(ListExampleResponse, a, b);
   }
 }
 
