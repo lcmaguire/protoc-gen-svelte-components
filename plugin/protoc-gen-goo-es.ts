@@ -141,7 +141,7 @@ function genList(schema: Schema, method : DescMethod){
   //  method.name
 
   const svelteTplate = `<script>
-  // Goal is to have it work with https://google.aip.dev/131
+  // Goal is to have it work with https://google.aip.dev/132
 
   // todo consider doing this via protogen import
   import { onMount } from "svelte";
@@ -202,6 +202,62 @@ should probably be next to Get or Delete
 
 */
 function genDelete(schema: Schema, method : DescMethod){
+  // let getResponse = method.output
+  // for fields in response create view
+  const f = schema.generateFile(`${method.name}.svelte`);
+  
+  // for fields in getResponse -> show
+  let ServiceName = "ExampleService" // todo dont hardcode this
+  let methodName = "deleteExample" // todo get this from component
+  const svelteTplate = `<script>
+  // Goal is to have it work with https://google.aip.dev/135
+
+  // todo consider doing this via protogen import
+  import {
+    createConnectTransport,
+    createPromiseClient,
+  } from "@bufbuild/connect-web";
+
+  import {
+    ${ServiceName}
+  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
+  
+  import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
+
+  export let name;
+
+  // todo import stuff and add logic here
+  // call code used by generated plugin
+  // todo move client creation to seperate pkg and import it here.
+  const transport = createConnectTransport({
+    baseUrl: "http://localhost:8080", // this should be set via config 
+  })
+  const client = createPromiseClient(${ServiceName}, transport)
+  
+  let loading = true
+  let res;
+
+  async function deleteExample() {
+    res = await client.${methodName}({name: name}) // todo pass in required fields
+    loading = false
+    // should probably refresh page
+  }
+  // todo probably handle this nicer
+  </script>
+
+  <h3>${methodName}</h3>
+  <button on:click={deleteExample}>
+	  Make Delete request
+  </button>
+
+  <GetExample name={name}/>
+  
+  `
+
+  f.print(svelteTplate)
+}
+
+function genCreate(schema: Schema, method : DescMethod){
   let getResponse = method.output
   // for fields in response create view
   const f = schema.generateFile(`${method.name}.svelte`);
@@ -225,7 +281,7 @@ function genDelete(schema: Schema, method : DescMethod){
   let ServiceName = "ExampleService" // todo dont hardcode this
   let methodName = "deleteExample" // todo get this from component
   const svelteTplate = `<script>
-  // Goal is to have it work with https://google.aip.dev/131
+  // Goal is to have it work with https://google.aip.dev/135
 
   // todo consider doing this via protogen import
   import {

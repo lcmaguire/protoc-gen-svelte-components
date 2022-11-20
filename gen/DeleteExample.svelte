@@ -1,5 +1,5 @@
 <script>
-  // Goal is to have it work with https://google.aip.dev/131
+  // Goal is to have it work with https://google.aip.dev/135
 
   // todo consider doing this via protogen import
   import {
