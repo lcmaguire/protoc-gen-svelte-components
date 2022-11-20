@@ -43,7 +43,7 @@ function generateTs(schema: Schema) {
 runNodeJs(protocGengooEs);
 
 
-function genGet(schema: Schema, method:DescMethod){
+function genGet(schema: Schema, method : DescMethod){
   let getResponse = method.output
 
   // for fields in response create view
@@ -64,16 +64,23 @@ function genGet(schema: Schema, method:DescMethod){
   let ServiceName = "ExampleService" // todo dont hardcode this
   let methodName = "getExample" // todo get this from component
   const svelteTplate = `<script>
+  // Goal is to have it work with https://google.aip.dev/131
 
   // todo consider doing this via protogen import
   import {
     createConnectTransport,
     createPromiseClient,
   } from "@bufbuild/connect-web";
+
+  import {
+    ${ServiceName}
+  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import
   
+  export let name;
+
   // todo import stuff and add logic here
   // call code used by generated plugin
-
+  // todo move client creation to seperate pkg and import it here.
   const transport = createConnectTransport({
     baseUrl: "http://localhost:8080", // this should be set via config 
   })
@@ -82,7 +89,7 @@ function genGet(schema: Schema, method:DescMethod){
   let loading = true
   let res;
   async function getExample() {
-    res = await client.${methodName}({}) // todo pass in required fields
+    res = await client.${methodName}({name: name}) // todo pass in required fields
     loading = false
   }
   // todo probably handle this nicer
@@ -92,6 +99,9 @@ function genGet(schema: Schema, method:DescMethod){
   ${html}
   {/if}
   `
+
+  // method.
+  
   // find out what f.preamble does
   f.print(svelteTplate)
 }
