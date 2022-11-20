@@ -2,8 +2,6 @@
   // Goal is to have it work with https://google.aip.dev/131
 
   // todo consider doing this via protogen import
-  import { onMount } from "svelte";
-  
   import {
     createConnectTransport,
     createPromiseClient,
@@ -13,6 +11,8 @@
     ExampleService
   } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
   
+  import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
+
   export let name;
 
   // todo import stuff and add logic here
@@ -25,21 +25,20 @@
   
   let loading = true
   let res;
-  
-  // call via onMount
-  onMount(async () => {
-    return await getExample()
-  })
 
-  async function getExample() {
-    res = await client.getExample({name: name}) // todo pass in required fields
+  async function deleteExample() {
+    res = await client.deleteExample({name: name}) // todo pass in required fields
     loading = false
+    // should probably refresh page
   }
   // todo probably handle this nicer
   </script>
 
-  <h3>getExample</h3>
-  {#if res != null}
-  <p>{res.name}</p><p>{res.display_name}</p>
-  {/if}
+  <h3>deleteExample</h3>
+  <button on:click={deleteExample}>
+	  Make Delete request
+  </button>
+
+  <GetExample name={name}/>
+  
   
