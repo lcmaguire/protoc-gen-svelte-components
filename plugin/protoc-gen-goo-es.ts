@@ -17,20 +17,20 @@ const protocGengooEs = createEcmaScriptPlugin({
 
 // prettier-ignore
 function generateTs(schema: Schema) { 
-  const f = schema.generateFile("test_name" + ".ts");
-  f.print("// ESTAMOS AQUI")
+  //const f = schema.generateFile("test_name" + ".ts");
+  //f.print("// ESTAMOS AQUI")
   // for each file
   for (let i = 0; i < schema.files.length; i++) {
-    f.print("// file")
+    //f.print("// file")
     let file = schema.files[i]
     // for each service in a file
     for (let j = 0; j < file.services.length; j++) {
       // for each method in a service
       let service = file.services[j]
-      f.print("// service " + service.name)
+      //f.print("// service " + service.name)
       for (let k = 0; k < service.methods.length; k++) {
         let method = service.methods[k]
-        f.print("// method " + method.name)
+        //f.print("// method " + method.name)
         // for each field -> gen view for Create, Get, List, Update and Delete
         if (method.name.includes("Get")){
           genGet(schema, method)
@@ -47,7 +47,7 @@ function genGet(schema: Schema, method:DescMethod){
   let getResponse = method.output
 
   // for fields in response create view
-  const f = schema.generateFile(`components/${method.name}.svelte`);
+  const f = schema.generateFile(`${method.name}.svelte`);
   
   // for fields in getResponse -> show
 
