@@ -8,7 +8,7 @@ plugins:
       out: gen
       opt: target=ts
     - name: goo-es
-      path: ./plugin/protoc-gen-goo-es.ts
+      path: ./plugin/protoc-gen-svelte-compenents.ts
       opt: target=ts
       out: gen
 
