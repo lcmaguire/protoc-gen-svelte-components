@@ -32,7 +32,7 @@ function generateTs(schema: Schema) {
         let method = service.methods[k]
         //f.print("// method " + method.name)
         // for each field -> gen view for Create, Get, List, Update and Delete
-        // todo switch statement
+        // todo switch statement + have behaviour set via an annotation
         if (method.name.includes("Get")){
           genGet(schema, method)
         } else if (method.name.includes("List")){
@@ -40,6 +40,8 @@ function generateTs(schema: Schema) {
         }
         else if (method.name.includes("Delete")){
           genDelete(schema, method)
+        } else if (method.name.includes("Create")){
+          genCreate(schema, method)
         }
       }
     }
@@ -274,14 +276,19 @@ function genCreate(schema: Schema, method : DescMethod){
       name = currentField.name
     }
 
-    let out = `<p>{res.${name}}</p>` 
+    let out = `
+    <label for="fname">${name}:</label><br>
+    <input bind:value={req.${name}} >
+    ` // change to be form
     html += out
+
+    // https://svelte.dev/tutorial/text-inputs consider
   }
 
   let ServiceName = "ExampleService" // todo dont hardcode this
-  let methodName = "deleteExample" // todo get this from component
+  let methodName = "createExample" // todo get this from component
   const svelteTplate = `<script>
-  // Goal is to have it work with https://google.aip.dev/135
+  // Goal is to have it work with https://google.aip.dev/133
 
   // todo consider doing this via protogen import
   import {
@@ -293,10 +300,6 @@ function genCreate(schema: Schema, method : DescMethod){
     ${ServiceName}
   } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
   
-  import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
-
-  export let name;
-
   // todo import stuff and add logic here
   // call code used by generated plugin
   // todo move client creation to seperate pkg and import it here.
@@ -308,21 +311,25 @@ function genCreate(schema: Schema, method : DescMethod){
   let loading = true
   let res;
 
-  async function deleteExample() {
-    res = await client.${methodName}({name: name}) // todo pass in required fields
+  let req = {};
+
+  async function createExample() {
+    // will need to build request to pass in.
+    res = await client.${methodName}(req) // todo pass in required fields
     loading = false
     // should probably refresh page
   }
   // todo probably handle this nicer
   </script>
 
-  <h3>${methodName}</h3>
-  <button on:click={deleteExample}>
-	  Make Delete request
-  </button>
 
-  <GetExample name={name}/>
-  
+  <h3>${methodName}</h3>
+
+  ${html}
+
+  <button on:click={createExample}>
+	  Make Create request
+  </button>
   `
 
   f.print(svelteTplate)
