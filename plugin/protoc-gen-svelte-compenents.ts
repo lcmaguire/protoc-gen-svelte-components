@@ -285,7 +285,7 @@ function genCreate(schema: Schema, method : DescMethod){
 
     let out = `
     <label for="fname">${name}:</label><br>
-    <input bind:value={req.${name}} >
+    <input bind:value={req.${name}} ><br>
     ` // change to be form
     html += out
 
