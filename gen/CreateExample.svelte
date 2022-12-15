@@ -22,6 +22,8 @@
   let loading = true
   let res;
 
+  // Some string
+
   let req = {};
 
   async function createExample() {

@@ -5,9 +5,12 @@ import {
   literalString,
   makeJsDoc,
   localName,
+  findCustomMessageOption,
 } from "@bufbuild/protoplugin/ecmascript";
 import type { DescMethod, MethodKind } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin/ecmascript";
+
+import {MyMethodDesc} from "../gen/example_pb"
 
 const protocGengooEs = createEcmaScriptPlugin({
   name: "protoc-gen-goo-es",
@@ -17,8 +20,6 @@ const protocGengooEs = createEcmaScriptPlugin({
 
 // prettier-ignore
 function generateTs(schema: Schema) { 
-  //const f = schema.generateFile("test_name" + ".ts");
-  //f.print("// ESTAMOS AQUI")
   // for each file
   for (let i = 0; i < schema.files.length; i++) {
     //f.print("// file")
@@ -30,7 +31,7 @@ function generateTs(schema: Schema) {
       //f.print("// service " + service.name)
       for (let k = 0; k < service.methods.length; k++) {
         let method = service.methods[k]
-        //f.print("// method " + method.name)
+
         // for each field -> gen view for Create, Get, List, Update and Delete
         // todo switch statement + have behaviour set via an annotation
         if (method.name.includes("Get")){
@@ -125,8 +126,6 @@ function genGet(schema: Schema, method : DescMethod){
   ${html}
   {/if}
   `
-
-  // method.
   
   // find out what f.preamble does
   f.print(svelteTplate)
@@ -266,6 +265,14 @@ function genCreate(schema: Schema, method : DescMethod){
   
   // for fields in getResponse -> show
 
+  //let te = method.proto.options?.toJsonString()
+  //let te = method.proto.options?.getType().
+  //f.print(te)
+  // https://github.com/bufbuild/protobuf-es/blob/main/docs/writing_plugins.md#message-options find message option 
+  //const option = findCustomMessageOption(method, 50007, ServiceOptions)
+
+  let te = findCustomMessageOption(method, 50007, MyMethodDesc)
+
   let html = ""
   for(let i = 0; i < getResponse.fields.length; i++){
     const currentField = getResponse.fields[i] // would probably need to recurse this in the event it is a message + do some nice stuff for alternate views.
@@ -310,6 +317,8 @@ function genCreate(schema: Schema, method : DescMethod){
   
   let loading = true
   let res;
+
+  // ${te?.bar}
 
   let req = {};
 
