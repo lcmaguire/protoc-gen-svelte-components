@@ -10,12 +10,20 @@ option go_package = "github.com/lcmaguire/protoc-gen-go-goo/examplefirebase/samp
 // todo make AIP approved
 service ExampleService {
     rpc CreateExample(Example) returns (Example) {
-        option (my_method_option).bar = "Some string";
+        option (my_method_option).bar = "Create";
     };
-    rpc GetExample(GetExampleRequest) returns (Example);
-    rpc ListExamples(ListExampleRequest) returns (ListExampleResponse);
-    rpc UpdateExample(Example) returns (Example);
-    rpc DeleteExample(DeleteExampleRequest) returns (google.protobuf.Empty);
+    rpc GetExample(GetExampleRequest) returns (Example){
+        option (my_method_option).bar = "Get";
+    };
+    rpc ListExamples(ListExampleRequest) returns (ListExampleResponse){
+        option (my_method_option).bar = "List";
+    };
+    rpc UpdateExample(Example) returns (Example){
+        option (my_method_option).bar = "Update";
+    };
+    rpc DeleteExample(DeleteExampleRequest) returns (google.protobuf.Empty){
+        option (my_method_option).bar = "Delete";
+    };
 }
 
 message Example {
@@ -46,9 +54,21 @@ extend google.protobuf.MessageOptions {
   
 extend google.protobuf.MethodOptions {
     optional MyMethodDesc my_method_option = 50007;
-  }
+}
 
 
+/* would need to contain the following info
+
+Expected behaviour (Create, Get, List, Delete, Update)
+ResourceName path
+
+a way for UI to decide how this should be rendered
+
+e.g. 
+Get is from mysite.com/myResource/{uuid}
+Or if it is displayed in a nested view, not based upon url.
+
+*/
 message MyMethodDesc {
     optional string bar = 2;
 }

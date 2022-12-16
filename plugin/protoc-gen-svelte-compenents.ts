@@ -10,7 +10,7 @@ import {
 import type { DescMethod, MethodKind } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin/ecmascript";
 
-import {MyMethodDesc} from "../gen/example_pb"
+import {MyMethodDesc} from "../gen/example_pb" // This would need to be imported from a diff pkg do work in real world. 
 
 const protocGengooEs = createEcmaScriptPlugin({
   name: "protoc-gen-goo-es",
@@ -22,16 +22,18 @@ const protocGengooEs = createEcmaScriptPlugin({
 function generateTs(schema: Schema) { 
   // for each file
   for (let i = 0; i < schema.files.length; i++) {
-    //f.print("// file")
     let file = schema.files[i]
-    // for each service in a file
     for (let j = 0; j < file.services.length; j++) {
-      // for each method in a service
       let service = file.services[j]
-      //f.print("// service " + service.name)
       for (let k = 0; k < service.methods.length; k++) {
         let method = service.methods[k]
 
+        let te = findCustomMessageOption(method, 50007, MyMethodDesc)
+
+        // based upon field in message, do X.
+        if (te?.bar == "Create") {
+          // 
+        }
         // for each field -> gen view for Create, Get, List, Update and Delete
         // todo switch statement + have behaviour set via an annotation
         if (method.name.includes("Get")){
