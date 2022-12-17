@@ -68,6 +68,8 @@ e.g.
 Get is from mysite.com/myResource/{uuid}
 Or if it is displayed in a nested view, not based upon url.
 
+Same as for if delete (after deletion is performed what should be done?)
+
 */
 message MyMethodDesc {
     optional string bar = 2;
