@@ -7,15 +7,8 @@
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
+  import {client} from "./client"
 
-  // todo import stuff and add logic here
-  // call code used by generated plugin
-  // todo move client creation to seperate pkg and import it here.
-  const transport = createConnectTransport({
-    baseUrl: "http://localhost:8080", // this should be set via config 
-  })
-  const client = createPromiseClient(ExampleService, transport)
-  
   let loading = true
   let res;
 

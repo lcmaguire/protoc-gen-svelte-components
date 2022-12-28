@@ -87,10 +87,7 @@ function genGet(schema: Schema, method : DescMethod){
   // todo consider doing this via protogen import
   import { onMount } from "svelte";
   
-  import {
-    createConnectTransport,
-    createPromiseClient,
-  } from "@bufbuild/connect-web";
+  
 
 
   export let name;
@@ -138,10 +135,7 @@ function genList(schema: Schema, method : DescMethod){
   // todo consider doing this via protogen import
   import { onMount } from "svelte";
   
-  import {
-    createConnectTransport,
-    createPromiseClient,
-  } from "@bufbuild/connect-web";
+  
 
 
   import {client} from "./client"
@@ -196,10 +190,7 @@ function genDelete(schema: Schema, method : DescMethod){
   // Goal is to have it work with https://google.aip.dev/135
 
   // todo consider doing this via protogen import
-  import {
-    createConnectTransport,
-    createPromiseClient,
-  } from "@bufbuild/connect-web";
+  
 
 
   import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
@@ -272,10 +263,7 @@ function genCreate(schema: Schema, method : DescMethod){
   // Goal is to have it work with https://google.aip.dev/133
 
   // todo consider doing this via protogen import
-  import {
-    createConnectTransport,
-    createPromiseClient,
-  } from "@bufbuild/connect-web";
+  
 
   import {client} from "./client"
 
