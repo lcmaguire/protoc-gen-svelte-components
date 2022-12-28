@@ -92,10 +92,7 @@ function genGet(schema: Schema, method : DescMethod){
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
-  import {
-    ${ServiceName}
-  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
+
   export let name;
 
   import {client} from "./client"
@@ -146,10 +143,7 @@ function genList(schema: Schema, method : DescMethod){
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
-  import {
-    ${ServiceName}
-  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
+
   import {client} from "./client"
 
   let loading = true // todo use this
@@ -207,10 +201,7 @@ function genDelete(schema: Schema, method : DescMethod){
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
-  import {
-    ${ServiceName}
-  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
+
   import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
 
   export let name;
@@ -286,10 +277,7 @@ function genCreate(schema: Schema, method : DescMethod){
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
-  import {
-    ${ServiceName}
-  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
+
   // todo import stuff and add logic here
   // call code used by generated plugin
   // todo move client creation to seperate pkg and import it here.
@@ -339,7 +327,6 @@ function genClientFile(schema: Schema, service: DescService) {
     ${serviceName}
   } from "./example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
   
-
 const transport = createConnectTransport({
     baseUrl: "http://localhost:8080", // this should be set via config 
   })

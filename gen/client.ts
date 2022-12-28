@@ -1,5 +1,4 @@
-
-  import {
+import {
     createConnectTransport,
     createPromiseClient,
   } from "@bufbuild/connect-web";
