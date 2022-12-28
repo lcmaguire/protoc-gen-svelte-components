@@ -44,6 +44,9 @@ function generateTs(schema: Schema) {
       }
     }
   }
+
+  // will generate file with ts client
+  genClientFile(schema)
 }
 
 runNodeJs(protocGengooEs);
@@ -95,14 +98,8 @@ function genGet(schema: Schema, method : DescMethod){
   
   export let name;
 
-  // todo import stuff and add logic here
-  // call code used by generated plugin
-  // todo move client creation to seperate pkg and import it here.
-  const transport = createConnectTransport({
-    baseUrl: "http://localhost:8080", // this should be set via config 
-  })
-  const client = createPromiseClient(${ServiceName}, transport)
-  
+  import {client} from "./client"
+
   let loading = true
   let res;
   
@@ -153,14 +150,8 @@ function genList(schema: Schema, method : DescMethod){
     ${ServiceName}
   } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
   
-  // todo import stuff and add logic here
-  // call code used by generated plugin
-  // todo move client creation to seperate pkg and import it here.
-  const transport = createConnectTransport({
-    baseUrl: "http://localhost:8080", // this should be set via config 
-  })
-  const client = createPromiseClient(${ServiceName}, transport)
-  
+  import {client} from "./client"
+
   let loading = true // todo use this
   let res;
   
@@ -224,13 +215,7 @@ function genDelete(schema: Schema, method : DescMethod){
 
   export let name;
 
-  // todo import stuff and add logic here
-  // call code used by generated plugin
-  // todo move client creation to seperate pkg and import it here.
-  const transport = createConnectTransport({
-    baseUrl: "http://localhost:8080", // this should be set via config 
-  })
-  const client = createPromiseClient(${ServiceName}, transport)
+  import {client} from "./client"
   
   let loading = true
   let res;
@@ -339,4 +324,28 @@ function genCreate(schema: Schema, method : DescMethod){
   `
 
   f.print(svelteTplate)
+}
+
+function genClientFile(schema: Schema) {
+  let tplate = `
+  import {
+    createConnectTransport,
+    createPromiseClient,
+  } from "@bufbuild/connect-web";
+
+  import {
+    ExampleService
+  } from "./example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
+  
+
+const transport = createConnectTransport({
+    baseUrl: "http://localhost:8080", // this should be set via config 
+  })
+const client = createPromiseClient(ExampleService, transport)
+  
+export {client}`
+
+const f = schema.generateFile(`client.ts`); // todo make it specific to service name 
+
+f.print(tplate)
 }
