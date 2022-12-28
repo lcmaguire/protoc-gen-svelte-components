@@ -16,7 +16,7 @@
   export let name;
 
   import {client} from "./client"
-
+  
   let loading = true
   let res;
 

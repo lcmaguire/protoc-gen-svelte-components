@@ -192,6 +192,20 @@ export class ListExampleResponse extends Message<ListExampleResponse> {
 }
 
 /**
+ * would need to contain the following info
+ *
+ * Expected behaviour (Create, Get, List, Delete, Update)
+ * ResourceName path
+ *
+ * a way for UI to decide how this should be rendered
+ *
+ * e.g. 
+ * Get is from mysite.com/myResource/{uuid}
+ * Or if it is displayed in a nested view, not based upon url.
+ *
+ * Same as for if delete (after deletion is performed what should be done?)
+ *
+ *
  * @generated from message tutorial.MyMethodDesc
  */
 export class MyMethodDesc extends Message<MyMethodDesc> {

@@ -11,12 +11,18 @@
     ExampleService
   } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
   
-  import {client} from "./client"
-
+  // todo import stuff and add logic here
+  // call code used by generated plugin
+  // todo move client creation to seperate pkg and import it here.
+  const transport = createConnectTransport({
+    baseUrl: "http://localhost:8080", // this should be set via config 
+  })
+  const client = createPromiseClient(ExampleService, transport)
+  
   let loading = true
   let res;
 
-  // Some string
+  // Create
 
   let req = {};
 
@@ -34,10 +40,10 @@
 
   
     <label for="fname">name:</label><br>
-    <input bind:value={req.name} >
+    <input bind:value={req.name} ><br>
     
     <label for="fname">display_name:</label><br>
-    <input bind:value={req.display_name} >
+    <input bind:value={req.display_name} ><br>
     
 
   <button on:click={createExample}>

@@ -7,7 +7,7 @@ import {
   localName,
   findCustomMessageOption,
 } from "@bufbuild/protoplugin/ecmascript";
-import type { DescMethod, MethodKind } from "@bufbuild/protobuf";
+import type { DescMethod, DescService, MethodKind } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin/ecmascript";
 
 import {MyMethodDesc} from "../gen/example_pb" // This would need to be imported from a diff pkg do work in real world. TODO see how to publish pkgs to npm
@@ -25,6 +25,7 @@ function generateTs(schema: Schema) {
     let file = schema.files[i]
     for (let j = 0; j < file.services.length; j++) {
       let service = file.services[j]
+      genClientFile(schema, service) // gens client for service.
       for (let k = 0; k < service.methods.length; k++) {
         let method = service.methods[k]
 
@@ -46,7 +47,6 @@ function generateTs(schema: Schema) {
   }
 
   // will generate file with ts client
-  genClientFile(schema)
 }
 
 runNodeJs(protocGengooEs);
@@ -216,7 +216,7 @@ function genDelete(schema: Schema, method : DescMethod){
   export let name;
 
   import {client} from "./client"
-  
+
   let loading = true
   let res;
 
@@ -254,6 +254,7 @@ function genCreate(schema: Schema, method : DescMethod){
   //const option = findCustomMessageOption(method, 50007, ServiceOptions)
 
   let te = findCustomMessageOption(method, 50007, MyMethodDesc)
+
 
   let html = ""
   for(let i = 0; i < getResponse.fields.length; i++){
@@ -326,7 +327,7 @@ function genCreate(schema: Schema, method : DescMethod){
   f.print(svelteTplate)
 }
 
-function genClientFile(schema: Schema) {
+function genClientFile(schema: Schema, service: DescService) {
   let tplate = `
   import {
     createConnectTransport,
