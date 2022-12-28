@@ -4,10 +4,7 @@
   // todo consider doing this via protogen import
   import { onMount } from "svelte";
   
-  import {
-    createConnectTransport,
-    createPromiseClient,
-  } from "@bufbuild/connect-web";
+  
 
 
   export let name;

@@ -2,10 +2,7 @@
   // Goal is to have it work with https://google.aip.dev/135
 
   // todo consider doing this via protogen import
-  import {
-    createConnectTransport,
-    createPromiseClient,
-  } from "@bufbuild/connect-web";
+  
 
 
   import GetExample from './GetExample.svelte'; // todo get the import based upon message used.

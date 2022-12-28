@@ -2,10 +2,7 @@
   // Goal is to have it work with https://google.aip.dev/133
 
   // todo consider doing this via protogen import
-  import {
-    createConnectTransport,
-    createPromiseClient,
-  } from "@bufbuild/connect-web";
+  
 
   import {client} from "./client"
 
