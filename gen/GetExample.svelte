@@ -9,10 +9,7 @@
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
-  import {
-    ExampleService
-  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
+
   export let name;
 
   import {client} from "./client"

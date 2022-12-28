@@ -7,10 +7,7 @@
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
-  import {
-    ExampleService
-  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
+
   import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
 
   export let name;

@@ -7,10 +7,7 @@
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
-  import {
-    ExampleService
-  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
+
   // todo import stuff and add logic here
   // call code used by generated plugin
   // todo move client creation to seperate pkg and import it here.
