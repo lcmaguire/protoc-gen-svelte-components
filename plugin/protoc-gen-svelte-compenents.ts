@@ -328,6 +328,7 @@ function genCreate(schema: Schema, method : DescMethod){
 }
 
 function genClientFile(schema: Schema, service: DescService) {
+  let serviceName = service.name
   let tplate = `
   import {
     createConnectTransport,
@@ -335,14 +336,14 @@ function genClientFile(schema: Schema, service: DescService) {
   } from "@bufbuild/connect-web";
 
   import {
-    ExampleService
+    ${serviceName}
   } from "./example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
   
 
 const transport = createConnectTransport({
     baseUrl: "http://localhost:8080", // this should be set via config 
   })
-const client = createPromiseClient(ExampleService, transport)
+const client = createPromiseClient(${serviceName}, transport)
   
 export {client}`
 
