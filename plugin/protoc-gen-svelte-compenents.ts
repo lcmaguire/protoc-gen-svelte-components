@@ -79,7 +79,7 @@ function genGet(schema: Schema, method : DescMethod){
     html += out
   }
 
-  let ServiceName = "ExampleService" // todo dont hardcode this
+  
   let methodName = "getExample" // todo get this from component
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/131
@@ -128,7 +128,7 @@ function genList(schema: Schema, method : DescMethod){
   // for fields in response create view
   const f = schema.generateFile(`${method.name}.svelte`);
   
-  let ServiceName = "ExampleService" // todo dont hardcode this
+  
   let methodName = "listExamples" // todo get this from component
   //  method.name
 
@@ -190,7 +190,7 @@ function genDelete(schema: Schema, method : DescMethod){
   const f = schema.generateFile(`${method.name}.svelte`);
   
   // for fields in getResponse -> show
-  let ServiceName = "ExampleService" // todo dont hardcode this
+  
   let methodName = "deleteExample" // todo get this from component
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/135
@@ -266,7 +266,7 @@ function genCreate(schema: Schema, method : DescMethod){
     // https://svelte.dev/tutorial/text-inputs consider
   }
 
-  let ServiceName = "ExampleService" // todo dont hardcode this
+  
   let methodName = "createExample" // todo get this from component
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/133
