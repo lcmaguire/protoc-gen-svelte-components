@@ -33,6 +33,18 @@ function generateTs(schema: Schema) {
 
         // for each field -> gen view for Create, Get, List, Update and Delete
         // todo switch statement + have behaviour set via an annotation
+        // have this be config driven
+      
+        if (method.name.startsWith("Get")){
+          genGet(schema, method)
+        } else if(method.name.startsWith("List")){
+          genList(schema, method)
+        }else if(method.name.startsWith("Delete")){
+          genDelete(schema, method)
+        } else if (method.name.startsWith("Get")){
+          genCreate(schema, method)
+        }
+
         if (te?.bar == "Get"){
           genGet(schema, method)
         } else if(te?.bar == "List"){
@@ -74,6 +86,8 @@ function genGet(schema: Schema, method : DescMethod){
     if (name == undefined) {
       name = currentField.name
     }
+
+    name = snakeCaseToCamelCase(name)
 
     let out = `<p>{res.${name}}</p>` 
     html += out
@@ -318,4 +332,21 @@ export {client}`
 const f = schema.generateFile(`client.ts`); // todo make it specific to service name 
 
 f.print(tplate)
+}
+
+function snakeCaseToCamelCase(input : string) {
+
+  // for string, replace all "_" with "", replace char with ToUpperCase
+  let i = 0
+  while (i < input.length) {
+   let res =  input.replace("_", "")
+   if (res == input) {
+      i++
+      continue
+   }
+   input = res
+   input = input.substring(0,i) + input.charAt(i).toLocaleUpperCase() + input.charAt(i+1)
+  }
+
+  return input
 }
