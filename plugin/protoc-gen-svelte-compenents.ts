@@ -335,18 +335,17 @@ f.print(tplate)
 }
 
 function snakeCaseToCamelCase(input : string) {
-
-  // for string, replace all "_" with "", replace char with ToUpperCase
-  let i = 0
-  while (i < input.length) {
-   let res =  input.replace("_", "")
-   if (res == input) {
-      i++
+  for (let i = 0; i < input.length; i++) {
+    let res  =  input.replace("_", "")
+    if (res == input) {
       continue
-   }
-   input = res
-   input = input.substring(0,i) + input.charAt(i).toLocaleUpperCase() + input.charAt(i+1)
+    }
+    let undrescoreIndex = input.indexOf("_")
+    input = res
+    //console.log(input)
+    input = input.substring(0,undrescoreIndex) + input.charAt(undrescoreIndex).toLocaleUpperCase() + input.substring(undrescoreIndex+1)
+    //console.log(input)
+    
   }
-
   return input
 }

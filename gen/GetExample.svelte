@@ -28,6 +28,6 @@
 
   <h3>getExample</h3>
   {#if res != null}
-  <p>{res.name}</p><p>{res.display_name}</p>
+  <p>{res.name}</p><p>{res.displayName}</p>
   {/if}
   
