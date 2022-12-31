@@ -335,6 +335,7 @@ f.print(tplate)
 }
 
 function snakeCaseToCamelCase(input : string) {
+  // todo have early exit for this func
   for (let i = 0; i < input.length; i++) {
     let res  =  input.replace("_", "")
     if (res == input) {
@@ -342,9 +343,7 @@ function snakeCaseToCamelCase(input : string) {
     }
     let undrescoreIndex = input.indexOf("_")
     input = res
-    //console.log(input)
     input = input.substring(0,undrescoreIndex) + input.charAt(undrescoreIndex).toLocaleUpperCase() + input.substring(undrescoreIndex+1)
-    //console.log(input)
     
   }
   return input
