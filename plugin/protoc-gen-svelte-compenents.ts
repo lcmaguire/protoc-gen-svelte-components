@@ -97,8 +97,6 @@ function genGet(schema: Schema, method: DescMethod) {
   let methodName = "getExample" // todo get this from component
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/131
-
-  // todo consider doing this via protogen import
   import { onMount } from "svelte";
   export let name;
 
@@ -137,17 +135,10 @@ function genList(schema: Schema, method: DescMethod) {
 
 
   let methodName = "listExamples" // todo get this from component
-  //  method.name
 
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/132
-
-  // todo consider doing this via protogen import
   import { onMount } from "svelte";
-  
-  
-
-
   import {client} from "./client"
 
   let loading = true // todo use this
@@ -182,12 +173,6 @@ function genList(schema: Schema, method: DescMethod) {
   f.print(svelteTplate)
 }
 
-
-/*
-
-should probably be next to Get or Delete
-
-*/
 function genDelete(schema: Schema, method: DescMethod) {
   // let getResponse = method.output
   // for fields in response create view
@@ -306,18 +291,17 @@ function genCreate(schema: Schema, method: DescMethod) {
   f.print(svelteTplate)
 }
 
+
+// import from generated code https://github.com/bufbuild/protobuf-es/blob/main/docs/writing_plugins.md#importing-from-protoc-gen-es-generated-code
 function genClientFile(schema: Schema, service: DescService) {
   let serviceName = service.name
+  service.
   let tplate = `
   import {
     createConnectTransport,
     createPromiseClient,
   } from "@bufbuild/connect-web";
 
-  import {
-    ${serviceName}
-  } from "./example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
 const transport = createConnectTransport({
     baseUrl: "http://localhost:8080", // this should be set via config 
   })
@@ -327,6 +311,7 @@ export {client}`
 
   const f = schema.generateFile(`client.ts`); // todo make it specific to service name 
 
+  f.import(service.name, ".")
   f.print(tplate)
 }
 
