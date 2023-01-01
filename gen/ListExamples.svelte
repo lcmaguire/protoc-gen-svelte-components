@@ -12,7 +12,7 @@
   })
 
   async function listExamples() {
-    res = await client.ListExamples({}) // todo pass in required fields
+    res = await client.listExamples({}) // todo pass in required fields
     loading = false
   }
   // todo probably handle this nicer

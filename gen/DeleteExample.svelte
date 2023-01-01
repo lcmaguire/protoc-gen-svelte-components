@@ -10,7 +10,7 @@
   let res;
 
   async function deleteExample() {
-    res = await client.DeleteExample({name: name}) // todo pass in required fields
+    res = await client.deleteExample({name: name}) // todo pass in required fields
     loading = false
     // should probably refresh page
   }

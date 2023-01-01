@@ -14,7 +14,7 @@
   })
 
   async function getExample() {
-    res = await client.GetExample({name: name}) // todo pass in required fields
+    res = await client.getExample({name: name}) // todo pass in required fields
     loading = false
   }
   // todo probably handle this nicer
