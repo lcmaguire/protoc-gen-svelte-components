@@ -100,10 +100,6 @@ function genGet(schema: Schema, method: DescMethod) {
 
   // todo consider doing this via protogen import
   import { onMount } from "svelte";
-  
-  
-
-
   export let name;
 
   import {client} from "./client"
