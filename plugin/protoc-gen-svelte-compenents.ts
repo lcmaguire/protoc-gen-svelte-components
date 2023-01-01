@@ -238,6 +238,9 @@ function genCreate(schema: Schema, method: DescMethod) {
       name = currentField.name
     }
 
+    //currentField.kind
+    // todo conditional html template based upon type of field
+
     let out = `
     <label for="fname">${name}:</label><br>
     <input bind:value={req.${name}} ><br>
