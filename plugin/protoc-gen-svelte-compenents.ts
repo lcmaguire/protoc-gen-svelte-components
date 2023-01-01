@@ -111,7 +111,7 @@ function genGet(schema: Schema, method: DescMethod) {
   })
 
   async function getExample() {
-    res = await client.${methodName}({name: name}) // todo pass in required fields
+    res = await client.${formatMethodName(methodName)}({name: name}) // todo pass in required fields
     loading = false
   }
   // todo probably handle this nicer
@@ -150,7 +150,7 @@ function genList(schema: Schema, method: DescMethod) {
   })
 
   async function listExamples() {
-    res = await client.${methodName}({}) // todo pass in required fields
+    res = await client.${formatMethodName(methodName)}({}) // todo pass in required fields
     loading = false
   }
   // todo probably handle this nicer
@@ -193,7 +193,7 @@ function genDelete(schema: Schema, method: DescMethod) {
   let res;
 
   async function deleteExample() {
-    res = await client.${methodName}({name: name}) // todo pass in required fields
+    res = await client.${formatMethodName(methodName)}({name: name}) // todo pass in required fields
     loading = false
     // should probably refresh page
   }
@@ -264,7 +264,7 @@ function genCreate(schema: Schema, method: DescMethod) {
 
   async function createExample() {
     // will need to build request to pass in.
-    res = await client.${methodName}(req) // todo pass in required fields
+    res = await client.${formatMethodName(methodName)}(req) // todo pass in required fields
     loading = false
     // should probably refresh page
   }
@@ -324,4 +324,11 @@ function snakeCaseToCamelCase(input: string) {
 
   }
   return input
+}
+
+// sets methodNames first character to be lowerCase.
+function formatMethodName(input: string) {
+  let firstChar = input.charAt(0).toLocaleLowerCase()
+  let out = firstChar + input.substring(1)
+  return out
 }

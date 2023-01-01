@@ -11,7 +11,7 @@
 
   async function createExample() {
     // will need to build request to pass in.
-    res = await client.CreateExample(req) // todo pass in required fields
+    res = await client.createExample(req) // todo pass in required fields
     loading = false
     // should probably refresh page
   }
