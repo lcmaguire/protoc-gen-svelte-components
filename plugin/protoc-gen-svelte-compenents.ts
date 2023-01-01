@@ -41,7 +41,7 @@ function generateTs(schema: Schema) {
           genList(schema, method)
         } else if (method.name.startsWith("Delete")) {
           genDelete(schema, method)
-        } else if (method.name.startsWith("Get")) {
+        } else if (method.name.startsWith("Create")) {
           genCreate(schema, method)
         }
 
@@ -258,7 +258,7 @@ function genCreate(schema: Schema, method: DescMethod) {
   let loading = true
   let res;
 
-  // ${te?.bar}
+  // method desc ${te?.bar}
 
   let req = {};
 
@@ -300,7 +300,8 @@ const transport = createConnectTransport({
   })
 const client = createPromiseClient(${serviceName}, transport)
   
-export {client}`
+export {client}
+`
 
   const f = schema.generateFile(`client.ts`); // todo make it specific to service name 
 

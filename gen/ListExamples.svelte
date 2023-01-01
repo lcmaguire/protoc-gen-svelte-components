@@ -12,13 +12,13 @@
   })
 
   async function listExamples() {
-    res = await client.listExamples({}) // todo pass in required fields
+    res = await client.ListExamples({}) // todo pass in required fields
     loading = false
   }
   // todo probably handle this nicer
   </script>
 
-  <h3>listExamples</h3>
+  <h3>ListExamples</h3>
   
   {#if res != null}
     {#each res.examples as item}

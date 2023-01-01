@@ -10,14 +10,14 @@
   let res;
 
   async function deleteExample() {
-    res = await client.deleteExample({name: name}) // todo pass in required fields
+    res = await client.DeleteExample({name: name}) // todo pass in required fields
     loading = false
     // should probably refresh page
   }
   // todo probably handle this nicer
   </script>
 
-  <h3>deleteExample</h3>
+  <h3>DeleteExample</h3>
   <button on:click={deleteExample}>
 	  Make Delete request
   </button>

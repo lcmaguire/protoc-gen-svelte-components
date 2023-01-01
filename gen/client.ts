@@ -11,3 +11,4 @@ const transport = createConnectTransport({
 const client = createPromiseClient(ExampleService, transport)
   
 export {client}
+
