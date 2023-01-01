@@ -183,11 +183,6 @@ function genDelete(schema: Schema, method: DescMethod) {
   let methodName = "deleteExample" // todo get this from component
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/135
-
-  // todo consider doing this via protogen import
-  
-
-
   import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
 
   export let name;
@@ -256,10 +251,6 @@ function genCreate(schema: Schema, method: DescMethod) {
   let methodName = "createExample" // todo get this from component
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/133
-
-  // todo consider doing this via protogen import
-  
-
   import {client} from "./client"
 
   let loading = true
