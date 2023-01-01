@@ -10,5 +10,5 @@ plugins:
     - name: goo-es
       path: ./plugin/protoc-gen-svelte-compenents.ts
       opt: target=ts
-      out: gen
+      out: gen # todo try this being diff path and getting genPath
 

@@ -191,3 +191,85 @@ export class ListExampleResponse extends Message<ListExampleResponse> {
   }
 }
 
+/**
+ * would need to contain the following info
+ *
+ * Expected behaviour (Create, Get, List, Delete, Update)
+ * ResourceName path
+ *
+ * a way for UI to decide how this should be rendered
+ *
+ * e.g. 
+ * Get is from mysite.com/myResource/{uuid}
+ * Or if it is displayed in a nested view, not based upon url.
+ *
+ * Same as for if delete (after deletion is performed what should be done?)
+ *
+ *
+ * @generated from message tutorial.MyMethodDesc
+ */
+export class MyMethodDesc extends Message<MyMethodDesc> {
+  /**
+   * @generated from field: optional string bar = 2;
+   */
+  bar?: string;
+
+  constructor(data?: PartialMessage<MyMethodDesc>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "tutorial.MyMethodDesc";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 2, name: "bar", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MyMethodDesc {
+    return new MyMethodDesc().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MyMethodDesc {
+    return new MyMethodDesc().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MyMethodDesc {
+    return new MyMethodDesc().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MyMethodDesc | PlainMessage<MyMethodDesc> | undefined, b: MyMethodDesc | PlainMessage<MyMethodDesc> | undefined): boolean {
+    return proto3.util.equals(MyMethodDesc, a, b);
+  }
+}
+
+/**
+ * @generated from message tutorial.MyMessage
+ */
+export class MyMessage extends Message<MyMessage> {
+  constructor(data?: PartialMessage<MyMessage>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "tutorial.MyMessage";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MyMessage {
+    return new MyMessage().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MyMessage {
+    return new MyMessage().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MyMessage {
+    return new MyMessage().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: MyMessage | PlainMessage<MyMessage> | undefined, b: MyMessage | PlainMessage<MyMessage> | undefined): boolean {
+    return proto3.util.equals(MyMessage, a, b);
+  }
+}
+
