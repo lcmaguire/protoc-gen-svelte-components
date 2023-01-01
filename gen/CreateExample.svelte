@@ -1,19 +1,25 @@
 <script>
   // Goal is to have it work with https://google.aip.dev/133
+
+  // todo consider doing this via protogen import
+  
+
   import {client} from "./client"
 
   let loading = true
   let res;
 
-  // todo this should probably be the type of CreateRequest 
+  // Create
+
   let req = {};
 
   async function createExample() {
     // will need to build request to pass in.
     res = await client.createExample(req) // todo pass in required fields
     loading = false
-    // todo refresh page / load result
+    // should probably refresh page
   }
+  // todo probably handle this nicer
   </script>
 
 

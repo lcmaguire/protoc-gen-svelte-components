@@ -1,12 +1,6 @@
 <script>
   // Goal is to have it work with https://google.aip.dev/131
-
-  // todo consider doing this via protogen import
   import { onMount } from "svelte";
-  
-  
-
-
   export let name;
 
   import {client} from "./client"

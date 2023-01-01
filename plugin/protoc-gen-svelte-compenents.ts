@@ -295,12 +295,12 @@ function genCreate(schema: Schema, method: DescMethod) {
 // import from generated code https://github.com/bufbuild/protobuf-es/blob/main/docs/writing_plugins.md#importing-from-protoc-gen-es-generated-code
 function genClientFile(schema: Schema, service: DescService) {
   let serviceName = service.name
-  service.
   let tplate = `
   import {
     createConnectTransport,
     createPromiseClient,
   } from "@bufbuild/connect-web";
+  import {${serviceName}} from "./example_connectweb" // todo have this be done based upon out path + serviceName
 
 const transport = createConnectTransport({
     baseUrl: "http://localhost:8080", // this should be set via config 
@@ -311,7 +311,9 @@ export {client}`
 
   const f = schema.generateFile(`client.ts`); // todo make it specific to service name 
 
-  f.import(service.name, ".")
+  f.import(service.methods[0].input)
+  
+  //f.import(service.name, "")
   f.print(tplate)
 }
 
