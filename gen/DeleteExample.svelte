@@ -1,10 +1,5 @@
 <script>
   // Goal is to have it work with https://google.aip.dev/135
-
-  // todo consider doing this via protogen import
-  
-
-
   import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
 
   export let name;

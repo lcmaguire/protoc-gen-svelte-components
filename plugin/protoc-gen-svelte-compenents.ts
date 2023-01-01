@@ -94,7 +94,7 @@ function genGet(schema: Schema, method: DescMethod) {
   }
 
 
-  let methodName = "getExample" // todo get this from component
+  let methodName = method.name
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/131
   import { onMount } from "svelte";
@@ -134,7 +134,7 @@ function genList(schema: Schema, method: DescMethod) {
   const f = schema.generateFile(`${method.name}.svelte`);
 
 
-  let methodName = "listExamples" // todo get this from component
+  let methodName = method.name
 
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/132
@@ -180,7 +180,7 @@ function genDelete(schema: Schema, method: DescMethod) {
 
   // for fields in getResponse -> show
 
-  let methodName = "deleteExample" // todo get this from component
+  let methodName = method.name
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/135
   import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
@@ -247,8 +247,7 @@ function genCreate(schema: Schema, method: DescMethod) {
     // https://svelte.dev/tutorial/text-inputs consider
   }
 
-
-  let methodName = "createExample" // todo get this from component
+  let methodName = method.name 
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/133
   import {client} from "./client"
