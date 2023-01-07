@@ -295,7 +295,8 @@ function htmlFromMessage(input: string, mess : DescMessage) {
 
 
     let out = `
-    <label for="fname">${name}:</label><br>`
+    <label for="fname">${name}:</label> <br>
+    `
     if (currentField.scalar == ScalarType.BOOL ){
       // if bool do x
       out += `<input type=checkbox  bind:value={req.${name}} checked={yes}>`

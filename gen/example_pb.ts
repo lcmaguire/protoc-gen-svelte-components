@@ -20,6 +20,16 @@ export class Example extends Message<Example> {
    */
   displayName = "";
 
+  /**
+   * @generated from field: bool active = 3;
+   */
+  active = false;
+
+  /**
+   * @generated from field: int32 count = 4;
+   */
+  count = 0;
+
   constructor(data?: PartialMessage<Example>) {
     super();
     proto3.util.initPartial(data, this);
@@ -30,6 +40,8 @@ export class Example extends Message<Example> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "active", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Example {

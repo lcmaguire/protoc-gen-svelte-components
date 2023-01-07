@@ -22,12 +22,14 @@
   <h3>CreateExample</h3>
 
   
-    <label for="fname">name:</label><br>
+    <label for="fname">name:</label> <br>
     <input bind:value={req.name} ><br>
-    
-    <label for="fname">display_name:</label><br>
+    <label for="fname">display_name:</label> <br>
     <input bind:value={req.display_name} ><br>
-    
+    <label for="fname">active:</label> <br>
+    <input type=checkbox  bind:value={req.active} checked={yes}>
+    <label for="fname">count:</label> <br>
+    <input type=number bind:value={req.count} min=0 max=10>
 
   <button on:click={createExample}>
 	  Make Create request
