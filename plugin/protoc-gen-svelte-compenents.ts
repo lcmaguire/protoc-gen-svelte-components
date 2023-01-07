@@ -272,6 +272,7 @@ function htmlFromMessage(input: string, mess : DescMessage) {
     if (name == undefined) {
       name = currentField.name
     }
+    name = snakeCaseToCamelCase(name)
     //currentField.kind
     // todo conditional html template based upon type of field
     // func for return input type based upon field type.

@@ -24,8 +24,8 @@
   
     <label for="fname">name:</label> <br>
     <input bind:value={req.name} ><br>
-    <label for="fname">display_name:</label> <br>
-    <input bind:value={req.display_name} ><br>
+    <label for="fname">displayName:</label> <br>
+    <input bind:value={req.displayName} ><br>
     <label for="fname">active:</label> <br>
     <input type=checkbox  bind:checked={req.active}><br>
     <label for="fname">count:</label> <br>
