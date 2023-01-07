@@ -275,38 +275,19 @@ function htmlFromMessage(input: string, mess : DescMessage) {
     //currentField.kind
     // todo conditional html template based upon type of field
     // func for return input type based upon field type.
-    /*
-        DOUBLE = 1,
-        FLOAT = 2,
-        INT64 = 3,
-        UINT64 = 4,
-        INT32 = 5,
-        FIXED64 = 6,
-        FIXED32 = 7,
-        BOOL = 8,
-        STRING = 9,
-        BYTES = 12,
-        UINT32 = 13,
-        SFIXED32 = 15,
-        SFIXED64 = 16,
-        SINT32 = 17,
-        SINT64 = 18
-    */
-
-
     let out = `
     <label for="fname">${name}:</label> <br>
     `
     if (currentField.scalar == ScalarType.BOOL ){
       // if bool do x
-      out += `<input type=checkbox  bind:value={req.${name}} checked={yes}>`
+      out += `<input type=checkbox  bind:checked={req.${name}}>`
     }
     if (currentField.scalar == ScalarType.STRING ){
       out += `<input bind:value={req.${name}} ><br>`
     }
     // for now just do 1 for all numeric types
-    if (currentField.scalar == ScalarType.INT32 ){
-      out += `<input type=number bind:value={req.${name}} min=0 max=10>` // may have to use value https://svelte.dev/tutorial/numeric-inputs
+    if (currentField.scalar == ScalarType.INT32 || currentField.scalar == ScalarType.INT64 ){
+      out += `<input type=number bind:value={req.${name}} >` // may have to use value https://svelte.dev/tutorial/numeric-inputs
     }
     // TODO select / drop down for enum
 
