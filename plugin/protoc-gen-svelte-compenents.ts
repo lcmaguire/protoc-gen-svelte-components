@@ -43,6 +43,8 @@ function generateTs(schema: Schema) {
           genDelete(schema, method)
         } else if (method.name.startsWith("Create")) {
           genCreate(schema, method)
+        } else if (method.name.startsWith("Update")) {
+          genUpdate(schema, method)
         }
 
         if (te?.bar == "Get") {
@@ -220,7 +222,7 @@ function genCreate(schema: Schema, method: DescMethod) {
   let te = findCustomMessageOption(method, 50007, MyMethodDesc)
 
   let html = ""
-  html = htmlFromMessage(html, method.input)
+  html = htmlFromMessage(html, "req",  method.input)
 
   let methodName = method.name 
   const svelteTplate = `<script>
@@ -264,7 +266,7 @@ function genUpdate(schema: Schema, method: DescMethod) {
   let te = findCustomMessageOption(method, 50007, MyMethodDesc)
 
   let html = ""
-  html = htmlFromMessage(html, method.input)
+  html = htmlFromMessage(html, "msg", method.input)
 
   let methodName = method.name 
   const svelteTplate = `<script>
@@ -316,7 +318,7 @@ function genUpdate(schema: Schema, method: DescMethod) {
 }
 
 // todo consider making this recursive with current fieldPath being used for nested messages. eg req.Example -> 
-function htmlFromMessage(input: string, mess : DescMessage) {
+function htmlFromMessage(input: string, currentPath: string, mess : DescMessage) {
   for (let i = 0; i < mess.fields.length; i++) {
     const currentField = mess.fields[i] // would probably need to recurse this in the event it is a message + do some nice stuff for alternate views.
     let name = currentField.jsonName
@@ -332,19 +334,26 @@ function htmlFromMessage(input: string, mess : DescMessage) {
     `
     if (currentField.scalar == ScalarType.BOOL ){
       // if bool do x
-      out += `<input type=checkbox  bind:checked={req.${name}}>`
+      out += `<input type=checkbox  bind:checked={${currentPath}.${name}}>`
     }
     if (currentField.scalar == ScalarType.STRING ){
-      out += `<input bind:value={req.${name}} >`
+      out += `<input bind:value={${currentPath}.${name}} >`
     }
     // for now just do 1 for all numeric types
     if (currentField.scalar == ScalarType.INT32 || currentField.scalar == ScalarType.INT64 ){
-      out += `<input type=number bind:value={req.${name}} >` // may have to use value https://svelte.dev/tutorial/numeric-inputs
+      out += `<input type=number bind:value={${currentPath}.${name}} >` // may have to use value https://svelte.dev/tutorial/numeric-inputs
     }
 
     if (currentField.scalar == ScalarType.UINT32 || currentField.scalar == ScalarType.UINT64 ){
-      out += `<input type=number bind:value={req.${name}} min=0>` // may have to use value https://svelte.dev/tutorial/numeric-inputs
+      out += `<input type=number bind:value={{${currentPath}.${name}} min=0>` // may have to use value https://svelte.dev/tutorial/numeric-inputs
     }
+
+    // handle nested messages
+    if (currentField.message != undefined){
+
+    }
+    // todo handle repeated fields
+    
     // TODO select / drop down for enum
     // problem will be with nested fields not containing Req. as bind val ( i guess field name passed in could help with this.)
     input += out + "<br>"
