@@ -213,20 +213,11 @@ function genDelete(schema: Schema, method: DescMethod) {
 }
 
 function genCreate(schema: Schema, method: DescMethod) {
-  let getResponse = method.output
-  // for fields in response create view
   const f = schema.generateFile(`${method.name}.svelte`);
 
-  // for fields in getResponse -> show
-
-  //let te = method.proto.options?.toJsonString()
-  //let te = method.proto.options?.getType().
-  //f.print(te)
   // https://github.com/bufbuild/protobuf-es/blob/main/docs/writing_plugins.md#message-options find message option 
   //const option = findCustomMessageOption(method, 50007, ServiceOptions)
-
   let te = findCustomMessageOption(method, 50007, MyMethodDesc)
-
 
   let html = ""
   html = htmlFromMessage(html, method.input)
@@ -265,6 +256,7 @@ function genCreate(schema: Schema, method: DescMethod) {
   f.print(svelteTplate)
 }
 
+// todo consider making this recursive with current fieldPath being used for nested messages. eg req.Example -> 
 function htmlFromMessage(input: string, mess : DescMessage) {
   for (let i = 0; i < mess.fields.length; i++) {
     const currentField = mess.fields[i] // would probably need to recurse this in the event it is a message + do some nice stuff for alternate views.
@@ -324,11 +316,8 @@ export {client}
   const f = schema.generateFile(`client.ts`); // todo make it specific to service name 
 
   f.import(service.methods[0].input)
-  
-  //f.import(service.name, "")
   f.print(tplate)
 }
-
 
 // TODO move below funcs to sep pkg / file
 function snakeCaseToCamelCase(input: string) {
