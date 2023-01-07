@@ -216,7 +216,7 @@ function genCreate(schema: Schema, method: DescMethod) {
   const f = schema.generateFile(`${method.name}.svelte`);
 
   // https://github.com/bufbuild/protobuf-es/blob/main/docs/writing_plugins.md#message-options find message option 
-  //const option = findCustomMessageOption(method, 50007, ServiceOptions)
+  // const option = findCustomMessageOption(method, 50007, ServiceOptions)
   let te = findCustomMessageOption(method, 50007, MyMethodDesc)
 
   let html = ""
