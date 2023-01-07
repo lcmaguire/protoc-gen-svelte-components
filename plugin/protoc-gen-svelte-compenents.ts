@@ -289,6 +289,10 @@ function htmlFromMessage(input: string, mess : DescMessage) {
     if (currentField.scalar == ScalarType.INT32 || currentField.scalar == ScalarType.INT64 ){
       out += `<input type=number bind:value={req.${name}} >` // may have to use value https://svelte.dev/tutorial/numeric-inputs
     }
+
+    if (currentField.scalar == ScalarType.UINT32 || currentField.scalar == ScalarType.UINT64 ){
+      out += `<input type=number bind:value={req.${name}} min=0>` // may have to use value https://svelte.dev/tutorial/numeric-inputs
+    }
     // TODO select / drop down for enum
 
     // problem will be with nested fields not containing Req. as bind val ( i guess field name passed in could help with this.)
