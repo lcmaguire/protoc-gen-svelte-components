@@ -283,7 +283,7 @@ function htmlFromMessage(input: string, mess : DescMessage) {
       out += `<input type=checkbox  bind:checked={req.${name}}>`
     }
     if (currentField.scalar == ScalarType.STRING ){
-      out += `<input bind:value={req.${name}} ><br>`
+      out += `<input bind:value={req.${name}} >`
     }
     // for now just do 1 for all numeric types
     if (currentField.scalar == ScalarType.INT32 || currentField.scalar == ScalarType.INT64 ){
@@ -294,9 +294,8 @@ function htmlFromMessage(input: string, mess : DescMessage) {
       out += `<input type=number bind:value={req.${name}} min=0>` // may have to use value https://svelte.dev/tutorial/numeric-inputs
     }
     // TODO select / drop down for enum
-
     // problem will be with nested fields not containing Req. as bind val ( i guess field name passed in could help with this.)
-    input += out
+    input += out + "<br>"
     
     // https://svelte.dev/tutorial/text-inputs consider
   }

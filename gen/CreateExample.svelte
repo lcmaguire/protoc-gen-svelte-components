@@ -27,9 +27,9 @@
     <label for="fname">display_name:</label> <br>
     <input bind:value={req.display_name} ><br>
     <label for="fname">active:</label> <br>
-    <input type=checkbox  bind:value={req.active} checked={yes}>
+    <input type=checkbox  bind:checked={req.active}><br>
     <label for="fname">count:</label> <br>
-    <input type=number bind:value={req.count} min=0 max=10>
+    <input type=number bind:value={req.count} ><br>
 
   <button on:click={createExample}>
 	  Make Create request
