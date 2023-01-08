@@ -30,6 +30,11 @@ export class Example extends Message<Example> {
    */
   count = 0;
 
+  /**
+   * @generated from field: tutorial.NestedMsg nest_msg = 5;
+   */
+  nestMsg?: NestedMsg;
+
   constructor(data?: PartialMessage<Example>) {
     super();
     proto3.util.initPartial(data, this);
@@ -42,6 +47,7 @@ export class Example extends Message<Example> {
     { no: 2, name: "display_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "active", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 5, name: "nest_msg", kind: "message", T: NestedMsg },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Example {
@@ -58,6 +64,43 @@ export class Example extends Message<Example> {
 
   static equals(a: Example | PlainMessage<Example> | undefined, b: Example | PlainMessage<Example> | undefined): boolean {
     return proto3.util.equals(Example, a, b);
+  }
+}
+
+/**
+ * @generated from message tutorial.NestedMsg
+ */
+export class NestedMsg extends Message<NestedMsg> {
+  /**
+   * @generated from field: string nest = 1;
+   */
+  nest = "";
+
+  constructor(data?: PartialMessage<NestedMsg>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "tutorial.NestedMsg";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "nest", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NestedMsg {
+    return new NestedMsg().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NestedMsg {
+    return new NestedMsg().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NestedMsg {
+    return new NestedMsg().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: NestedMsg | PlainMessage<NestedMsg> | undefined, b: NestedMsg | PlainMessage<NestedMsg> | undefined): boolean {
+    return proto3.util.equals(NestedMsg, a, b);
   }
 }
 

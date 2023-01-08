@@ -31,7 +31,7 @@ message Example {
     string display_name = 2 [json_name="displayName"];
     bool active = 3;
     int32 count = 4;
-    NestedMsg nest = 5;
+    NestedMsg nest_msg = 5;
 }
 
 message NestedMsg {
