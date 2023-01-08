@@ -22,6 +22,6 @@
 
   <h3>GetExample</h3>
   {#if res != null}
-  <p>{res.name}</p><p>{res.displayName}</p><p>{res.active}</p><p>{res.count}</p><p>{res.nestMsg}</p>
+  <p>{res.name}</p><p>{res.displayName}</p><p>{res.active}</p><p>{res.count}</p>
   {/if}
   

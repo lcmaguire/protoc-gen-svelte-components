@@ -45,12 +45,6 @@
     <input type=checkbox  bind:checked={msg.active}><br>
     <label for="fname">count:</label> <br>
     <input type=number bind:value={msg.count} ><br>
-    <label for="fname">nestMsg:</label> <br>
-    
-    <label for="fname">nestMsg:</label> <br>
-    
-    <label for="fname">nest:</label> <br>
-    <input bind:value={msg.nestMsg.nest} ><br><br>
 
   <button on:click={updateExample}>
 	  Make Update request
