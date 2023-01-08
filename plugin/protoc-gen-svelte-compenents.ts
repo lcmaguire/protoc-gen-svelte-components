@@ -348,13 +348,13 @@ function htmlFromMessage(input: string, currentPath: string, mess : DescMessage)
       out += `<input type=number bind:value={{${currentPath}.${name}} min=0>` // may have to use value https://svelte.dev/tutorial/numeric-inputs
     }
 
-    // handle nested messages
+    // handle nested messages NOTE: will need to init to empty obj for nested structs. // eg let req = { nest: {}}
     if (currentField.message != undefined){
       // if nested msg should be within another one of these.
       currentPath = `${currentPath}.${name}`
       out += htmlFromMessage(out, currentPath, currentField.message)
     }
-    
+
     // todo handle repeated fields
     
     // TODO select / drop down for enum
