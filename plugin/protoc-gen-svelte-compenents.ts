@@ -350,8 +350,11 @@ function htmlFromMessage(input: string, currentPath: string, mess : DescMessage)
 
     // handle nested messages
     if (currentField.message != undefined){
-
+      // if nested msg should be within another one of these.
+      currentPath = `${currentPath}.${name}`
+      out += htmlFromMessage(out, currentPath, currentField.message)
     }
+    
     // todo handle repeated fields
     
     // TODO select / drop down for enum
@@ -366,6 +369,7 @@ function htmlFromMessage(input: string, currentPath: string, mess : DescMessage)
 // import from generated code https://github.com/bufbuild/protobuf-es/blob/main/docs/writing_plugins.md#importing-from-protoc-gen-es-generated-code
 function genClientFile(schema: Schema, service: DescService) {
   let serviceName = service.name
+  // import {serviceName} from ./path/{service}_connectweb
   let tplate = `
 import {
   createConnectTransport,
