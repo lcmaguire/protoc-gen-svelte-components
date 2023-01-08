@@ -15,11 +15,21 @@ import { MyMethodDesc } from "../gen/example_pb" // This would need to be import
 const protocGengooEs = createEcmaScriptPlugin({
   name: "protoc-gen-goo-es",
   version: `v0.2.1`,
+  parseOption,
   generateTs,
 });
 
+let connectImportPath = ""
+
+function parseOption(key: string, value: string | undefined){
+  if (key == "connectImportPath" && value != undefined) {
+    connectImportPath = value
+  }
+}
+
 // prettier-ignore
 function generateTs(schema: Schema) {
+  // schema.targets.
   // for each file
   for (let i = 0; i < schema.files.length; i++) {
     let file = schema.files[i]
@@ -370,12 +380,15 @@ function htmlFromMessage(input: string, currentPath: string, mess : DescMessage)
 function genClientFile(schema: Schema, service: DescService) {
   let serviceName = service.name
   // import {serviceName} from ./path/{service}_connectweb
+  if (connectImportPath == "") { // todo only make it be the path.
+    connectImportPath = "./example_connectweb"
+  }
   let tplate = `
 import {
   createConnectTransport,
   createPromiseClient,
 } from "@bufbuild/connect-web";
-import {${serviceName}} from "./example_connectweb" // todo have this be done based upon out path + serviceName
+import {${serviceName}} from "${connectImportPath}" // todo have this be done based upon out path + serviceName
 
 const transport = createConnectTransport({
   baseUrl: "http://localhost:8080", // this should be set via config 
