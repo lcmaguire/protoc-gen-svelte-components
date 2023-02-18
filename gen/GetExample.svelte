@@ -14,10 +14,10 @@
   })
 
   async function getExample() {
-    res = await client.getExample({name: name}) // todo pass in required fields
+    res = await client.getExample({name: name}) // 
     loading = false
   }
-  // todo probably handle this nicer
+ 
   </script>
 
   <h3>GetExample</h3>

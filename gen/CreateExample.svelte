@@ -11,11 +11,11 @@
 
   async function createExample() {
     // will need to build request to pass in.
-    res = await client.createExample(req) // todo pass in required fields
+    res = await client.createExample(req) // 
     loading = false
     // should probably refresh page
   }
-  // todo probably handle this nicer
+ 
   </script>
 
 

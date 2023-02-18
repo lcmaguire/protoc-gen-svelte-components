@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import {client} from "./client"
 
-  let loading = true // todo use this
+  let loading = true
   let res;
   
   // call via onMount
@@ -12,10 +12,10 @@
   })
 
   async function listExamples() {
-    res = await client.listExamples({}) // todo pass in required fields
+    res = await client.listExamples({}) 
     loading = false
   }
-  // todo probably handle this nicer
+ 
   </script>
 
   <h3>ListExamples</h3>

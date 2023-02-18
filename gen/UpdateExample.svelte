@@ -13,23 +13,21 @@
   let msg = {};
 
   onMount(async () => {
-      return await getExample() // TODO maybe this should be handled outside of this func (msg passed in.)
+      return await getExample() 
   })
 
   // todo have this func be imported
   async function getExample() {
-      msg = await client.getExample({name: name}) // todo pass in required fields
+      msg = await client.getExample({name: name}) // 
       loading = false
   }
 
   async function updateExample() {
-    // will need to build request to pass in.
     // let updateRequest = {} // todo have this be message + fieldMask for updateRequst.
-    msg = await client.updateExample(msg) // todo pass in required fields
+    msg = await client.updateExample(msg) // 
     loading = false
-    // should probably refresh page
   }
-  // todo probably handle this nicer
+ 
   </script>
 
 
