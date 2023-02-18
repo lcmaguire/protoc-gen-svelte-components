@@ -38,9 +38,6 @@ function generateTs(schema: Schema) {
       genClientFile(schema, service) // gens client for service.
       for (let k = 0; k < service.methods.length; k++) {
         let method = service.methods[k]
-
-        let te = findCustomMessageOption(method, 50007, MyMethodDesc)
-
         // for each field -> gen view for Create, Get, List, Update and Delete
         // todo switch statement + have behaviour set via an annotation
         // have this be config driven
@@ -59,6 +56,7 @@ function generateTs(schema: Schema) {
         }
 
         // This is annotation / behaviour based approach. More flexbile for api naming at cost of additional overhead.
+        let te = findCustomMessageOption(method, 50007, MyMethodDesc) // Would require use to gen this as well.
         if (te?.bar == "Get") {
           genGet(schema, method)
         } else if (te?.bar == "List") {
