@@ -10,7 +10,8 @@ import {
 import { DescMessage, DescMethod, DescService, MethodKind, ScalarType } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin/ecmascript";
 
-import { MyMethodDesc } from "../gen/example_pb" // This would need to be imported from a diff pkg do work in real world. TODO see how to publish pkgs to npm
+// This may not work outside of my machine. e.g. Unsure if this will be generated equally in diff projects.
+import { MyMethodDesc } from "../gen/example_pb" 
 
 const protocGengooEs = createEcmaScriptPlugin({
   name: "protoc-gen-goo-es",
@@ -23,7 +24,7 @@ let connectImportPath = ""
 
 function parseOption(key: string, value: string | undefined){
   if (key == "connectImportPath" && value != undefined) {
-    connectImportPath = value // does this work?
+    connectImportPath = value
   }
 }
 
@@ -38,9 +39,6 @@ function generateTs(schema: Schema) {
       genClientFile(schema, service) // gens client for service.
       for (let k = 0; k < service.methods.length; k++) {
         let method = service.methods[k]
-        // for each field -> gen view for Create, Get, List, Update and Delete
-        // todo switch statement + have behaviour set via an annotation
-        // have this be config driven
 
         // This is Prefix approach, probably not optimal if people want to name there apis, differently.
         if (method.name.startsWith("Get")) {
@@ -78,7 +76,6 @@ runNodeJs(protocGengooEs);
 /*
   Get todos
 
-  snake -> camel
   MethodName -> methodName 
   different fieldTypes show different things
 */
@@ -123,10 +120,10 @@ function genGet(schema: Schema, method: DescMethod) {
   })
 
   async function getExample() {
-    res = await client.${formatMethodName(methodName)}({name: name}) // todo pass in required fields
+    res = await client.${formatMethodName(methodName)}({name: name}) // 
     loading = false
   }
-  // todo probably handle this nicer
+ 
   </script>
 
   <h3>${methodName}</h3>
@@ -139,7 +136,6 @@ function genGet(schema: Schema, method: DescMethod) {
   f.print(svelteTplate)
 }
 
-// todo for this.
 function genList(schema: Schema, method: DescMethod) {
   //let listResponse = method.output
   // for fields in response create view
@@ -153,7 +149,7 @@ function genList(schema: Schema, method: DescMethod) {
   import { onMount } from "svelte";
   import {client} from "./client"
 
-  let loading = true // todo use this
+  let loading = true
   let res;
   
   // call via onMount
@@ -162,10 +158,10 @@ function genList(schema: Schema, method: DescMethod) {
   })
 
   async function listExamples() {
-    res = await client.${formatMethodName(methodName)}({}) // todo pass in required fields
+    res = await client.${formatMethodName(methodName)}({}) 
     loading = false
   }
-  // todo probably handle this nicer
+ 
   </script>
 
   <h3>${methodName}</h3>
@@ -195,7 +191,7 @@ function genDelete(schema: Schema, method: DescMethod) {
   let methodName = method.name
   const svelteTplate = `<script>
   // Goal is to have it work with https://google.aip.dev/135
-  import GetExample from './GetExample.svelte'; // todo get the import based upon message used.
+  import GetExample from './GetExample.svelte'; 
 
   export let name;
 
@@ -205,11 +201,11 @@ function genDelete(schema: Schema, method: DescMethod) {
   let res;
 
   async function deleteExample() {
-    res = await client.${formatMethodName(methodName)}({name: name}) // todo pass in required fields
+    res = await client.${formatMethodName(methodName)}({name: name}) // 
     loading = false
     // should probably refresh page
   }
-  // todo probably handle this nicer
+ 
   </script>
 
   <h3>${methodName}</h3>
@@ -248,11 +244,11 @@ function genCreate(schema: Schema, method: DescMethod) {
 
   async function createExample() {
     // will need to build request to pass in.
-    res = await client.${formatMethodName(methodName)}(req) // todo pass in required fields
+    res = await client.${formatMethodName(methodName)}(req) // 
     loading = false
     // should probably refresh page
   }
-  // todo probably handle this nicer
+ 
   </script>
 
 
@@ -294,23 +290,21 @@ function genUpdate(schema: Schema, method: DescMethod) {
   let msg = {};
 
   onMount(async () => {
-      return await getExample() // TODO maybe this should be handled outside of this func (msg passed in.)
+      return await getExample() 
   })
 
   // todo have this func be imported
   async function getExample() {
-      msg = await client.getExample({name: name}) // todo pass in required fields
+      msg = await client.getExample({name: name}) // 
       loading = false
   }
 
   async function updateExample() {
-    // will need to build request to pass in.
     // let updateRequest = {} // todo have this be message + fieldMask for updateRequst.
-    msg = await client.${formatMethodName(methodName)}(msg) // todo pass in required fields
+    msg = await client.${formatMethodName(methodName)}(msg) // 
     loading = false
-    // should probably refresh page
   }
-  // todo probably handle this nicer
+ 
   </script>
 
 
@@ -327,7 +321,6 @@ function genUpdate(schema: Schema, method: DescMethod) {
   f.print(svelteTplate)
 }
 
-// todo consider making this recursive with current fieldPath being used for nested messages. eg req.Example -> 
 function htmlFromMessage(input: string, currentPath: string, mess : DescMessage) {
   for (let i = 0; i < mess.fields.length; i++) {
     const currentField = mess.fields[i] // would probably need to recurse this in the event it is a message + do some nice stuff for alternate views.
@@ -365,9 +358,6 @@ function htmlFromMessage(input: string, currentPath: string, mess : DescMessage)
       out += htmlFromMessage(out, currentPath, currentField.message)
     }
 
-    // todo handle repeated fields
-    
-    // TODO select / drop down for enum
     // problem will be with nested fields not containing Req. as bind val ( i guess field name passed in could help with this.)
     input += out + "<br>"
     
@@ -380,7 +370,7 @@ function htmlFromMessage(input: string, currentPath: string, mess : DescMessage)
 function genClientFile(schema: Schema, service: DescService) {
   let serviceName = service.name
   // import {serviceName} from ./path/{service}_connectweb
-  if (connectImportPath == "") { // todo only make it be the path.
+  if (connectImportPath == "") { 
     connectImportPath = "./example_connectweb"
   }
   let tplate = `
@@ -388,25 +378,23 @@ import {
   createConnectTransport,
   createPromiseClient,
 } from "@bufbuild/connect-web";
-import {${serviceName}} from "${connectImportPath}" // todo have this be done based upon out path + serviceName
+import {${serviceName}} from "${connectImportPath}"
 
 const transport = createConnectTransport({
-  baseUrl: "http://localhost:8080", // this should be set via config 
+  baseUrl: "http://localhost:8080", // TODO have this be an env var.
 })
 const client = createPromiseClient(${serviceName}, transport)
   
 export {client}
 `
 
-  const f = schema.generateFile(`client.ts`); // todo make it specific to service name 
+  const f = schema.generateFile(`client.ts`); 
 
   f.import(service.methods[0].input)
   f.print(tplate)
 }
 
-// TODO move below funcs to sep pkg / file
 function snakeCaseToCamelCase(input: string) {
-  // todo have early exit for this func
   for (let i = 0; i < input.length; i++) {
     let res = input.replace("_", "")
     if (res == input) {
