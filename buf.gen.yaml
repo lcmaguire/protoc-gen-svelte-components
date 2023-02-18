@@ -9,6 +9,8 @@ plugins:
       opt: target=ts
     - name: goo-es
       path: ./plugin/protoc-gen-svelte-compenents.ts
-      opt: target=ts
-      out: gen
+      opt: 
+        - target=ts
+        - connectImportPath=./example_connectweb
+      out: gen # todo try this being diff path and getting genPath
 

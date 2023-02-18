@@ -1,28 +1,10 @@
 <script>
   // Goal is to have it work with https://google.aip.dev/131
-
-  // todo consider doing this via protogen import
   import { onMount } from "svelte";
-  
-  import {
-    createConnectTransport,
-    createPromiseClient,
-  } from "@bufbuild/connect-web";
-
-  import {
-    ExampleService
-  } from "../../gen/example_connectweb" // todo have the path determind by @ or from import (or just have a ts/js file imported to this script)
-  
   export let name;
 
-  // todo import stuff and add logic here
-  // call code used by generated plugin
-  // todo move client creation to seperate pkg and import it here.
-  const transport = createConnectTransport({
-    baseUrl: "http://localhost:8080", // this should be set via config 
-  })
-  const client = createPromiseClient(ExampleService, transport)
-  
+  import {client} from "./client"
+
   let loading = true
   let res;
   
@@ -32,14 +14,14 @@
   })
 
   async function getExample() {
-    res = await client.getExample({name: name}) // todo pass in required fields
+    res = await client.getExample({name: name}) // 
     loading = false
   }
-  // todo probably handle this nicer
+ 
   </script>
 
-  <h3>getExample</h3>
+  <h3>GetExample</h3>
   {#if res != null}
-  <p>{res.name}</p><p>{res.display_name}</p>
+  <p>{res.name}</p><p>{res.displayName}</p><p>{res.active}</p><p>{res.count}</p>
   {/if}
   
