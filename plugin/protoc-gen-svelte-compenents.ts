@@ -23,7 +23,7 @@ let connectImportPath = ""
 
 function parseOption(key: string, value: string | undefined){
   if (key == "connectImportPath" && value != undefined) {
-    connectImportPath = value
+    connectImportPath = value // does this work?
   }
 }
 
@@ -45,6 +45,7 @@ function generateTs(schema: Schema) {
         // todo switch statement + have behaviour set via an annotation
         // have this be config driven
 
+        // This is Prefix approach, probably not optimal if people want to name there apis, differently.
         if (method.name.startsWith("Get")) {
           genGet(schema, method)
         } else if (method.name.startsWith("List")) {
@@ -57,6 +58,7 @@ function generateTs(schema: Schema) {
           genUpdate(schema, method)
         }
 
+        // This is annotation / behaviour based approach. More flexbile for api naming at cost of additional overhead.
         if (te?.bar == "Get") {
           genGet(schema, method)
         } else if (te?.bar == "List") {
@@ -65,12 +67,12 @@ function generateTs(schema: Schema) {
           genDelete(schema, method)
         } else if (te?.bar == "Create") {
           genCreate(schema, method)
+        } else if (te?.bar =="Update") {
+          genUpdate(schema, method)
         }
       }
     }
   }
-
-  // will generate file with ts client
 }
 
 runNodeJs(protocGengooEs);
