@@ -11,7 +11,7 @@ import { DescMessage, DescMethod, DescService, MethodKind, ScalarType } from "@b
 import type { Schema } from "@bufbuild/protoplugin/ecmascript";
 
 // This may not work outside of my machine. e.g. Unsure if this will be generated equally in diff projects.
-import { MyMethodDesc } from "../gen/example_pb" 
+import { MyMethodDesc } from "../gen/proto/example_pb" 
 
 const protocGengooEs = createEcmaScriptPlugin({
   name: "protoc-gen-goo-es",
